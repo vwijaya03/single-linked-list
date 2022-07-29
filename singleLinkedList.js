@@ -148,6 +148,35 @@ class singleLinkedList {
 
         return true;
     }
+
+    remove(index) {
+        if (index < 0 || index >= this.length) return undefined;
+        if (index === this.length - 1) {
+            this.pop();
+            return true;
+        };
+        if (index === 0) {
+            this.shift();
+            return true;
+        };
+
+        let prevNode = this.get(index-1);
+        let removedNode = prevNode.next;
+        prevNode.next = removedNode.next;
+        this.length--;
+
+        return removedNode;
+    }
+
+    reverse() {
+        let lastNode = this.tail;
+        let node = this.get(this.length-2);
+        let count =  this.length - 2;
+
+        while(count > 0) {
+            lastNode.next = this.get(count);
+        }
+    }
 }
 
 let list = new singleLinkedList();
@@ -160,8 +189,9 @@ list.push({name: 'Joko', email: 'joko@mail.com'});
 // list.shift();
 // list.pop();
 // list.pop();
-list.set(1, 'Michi Momo');
+// list.set(1, 'Michi Momo');
 list.insert(1, 'Diablo');
+// list.remove(3);
 
-console.log(JSON.stringify(list, null, 2));
+console.log(JSON.stringify(list.reverse(), null, 2));
 // console.log(list.head.next.next);
