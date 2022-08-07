@@ -169,20 +169,55 @@ class singleLinkedList {
     }
 
     reverse() {
-        let lastNode = this.tail;
-        let node = this.get(this.length-2);
-        let count =  this.length - 2;
+        let node = this.head;
 
-        while(count > 0) {
-            lastNode.next = this.get(count);
+        node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let next, prev = null;
+        
+        for (let i = 0; i < this.length; i++) {
+            next = node.next; 
+            node.next = prev; 
+            prev = node;
+            node = next; 
+
+            /*
+                must check  the console log of these first, 
+                for not become confused with current node value at the first time
+
+                console.log(this.head);
+                console.log(this.tail);
+                console.log(node);
+            */
+
+            // iterate 1
+            // 201 - 205 saved here
+            // node.next set equal to null (current node = (100, 201, 205, null) and then become (100, null) because the next (201, 205, null) changed to null by prev)
+            // prev set equal to (100, null)
+            // node set equal to (201, 205)
+
+            // iterate 2
+            // 205, null saved here
+            // node.next set equal to (100, null), and the current node (201, 205) and then become (201, 100, null) because the next (205) changed to prev (100, null)
+            // prev set equal to (201, 100, null)
+            // node set equal to (205, null)
+
+            // iterate 3
+            // null, because the latest node is (205, null) and take the node.next = null
+            // node.next set equal to (201, 100, null) and the current node (205, null) and then become (205, 201, 100, null) because the next (null) changed to prev (201, 100, null)
+            // prev set equal to (205, 201, 100, null)
+            // null, because of the next variable
         }
+        return this;
     }
 }
 
 let list = new singleLinkedList();
-list.push('Hi');
-list.push('There');
-list.push({name: 'Joko', email: 'joko@mail.com'});
+list.push('100');
+list.push('201');
+list.push('205');
+// list.push({name: 'Joko', email: 'joko@mail.com'});
 // list.unshift({name: 'Anton', email: 'anton@mail.com'});
 // list.unshift({name: 'Audrey', email: 'audrey@mail.com'});
 // list.unshift('Hi');
@@ -190,8 +225,8 @@ list.push({name: 'Joko', email: 'joko@mail.com'});
 // list.pop();
 // list.pop();
 // list.set(1, 'Michi Momo');
-list.insert(1, 'Diablo');
+// list.insert(1, 'Diablo');
 // list.remove(3);
-
+// list.reverse();
 console.log(JSON.stringify(list.reverse(), null, 2));
 // console.log(list.head.next.next);
