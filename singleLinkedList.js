@@ -30,7 +30,7 @@ class singleLinkedList {
         return this;
     }
 
-    // tambah item baru di posisi terakhir
+    // tambah item baru di posisi paling awal
     unshift(val) {
         let newNode = new Node(val);
 
@@ -228,5 +228,5 @@ list.push('205');
 // list.insert(1, 'Diablo');
 // list.remove(3);
 // list.reverse();
-console.log(JSON.stringify(list.reverse(), null, 2));
+console.log(JSON.stringify(list, null, 2));
 // console.log(list.head.next.next);
